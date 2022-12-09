@@ -27,7 +27,7 @@ function App() {
                     decrement
                 </button>
 
-                <button onClick={() => setCount(0)}>
+                <button onClick={() => setCount(0)} disabled={count === 0}>
                     reset
                 </button>
             </div>

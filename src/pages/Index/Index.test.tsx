@@ -6,7 +6,8 @@ const indexPage = {
     clickButton: (command: "increment" | "decrement" | "reset") => {
         const buttonElement = screen.getByText(command);
         fireEvent.click(buttonElement);
-    }
+    },
+    getResetButton: () => screen.getByText('reset'),
 }
 
 describe("Index.test.tsx - Index Page", () => {
@@ -57,6 +58,12 @@ describe("Index.test.tsx - Index Page", () => {
 
             indexPage.clickButton("reset");
             expect(indexPage.isCounterValue(0)).toBeTruthy();
+        })
+
+        it("should disable the reset button when the count is 0", () => {
+            render(<App />);
+
+            expect(indexPage.getResetButton()).toBeDisabled()
         })
     })
 });

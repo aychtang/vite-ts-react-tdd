@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "ci-build": "tsc && NODE_ENV=test jest && vite build",
+    "build": "tsc && NODE_ENV=test jest && vite build",
+    "build-no-test": "tsc && vite build",
     "preview": "vite preview",
     "test": "NODE_ENV=test jest"
   },

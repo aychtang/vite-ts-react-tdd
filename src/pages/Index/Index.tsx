@@ -17,7 +17,7 @@ function App() {
             </div>
             <h1>Vite + React</h1>
             <div className="card">
-                <h2>count is {count}</h2>
+                <h2>counter value is {count}</h2>
 
                 <button onClick={() => setCount((count) => count + 1)}>
                     increment
@@ -25,6 +25,10 @@ function App() {
 
                 <button onClick={() => setCount((count) => count - 1)}>
                     decrement
+                </button>
+
+                <button onClick={() => setCount(0)}>
+                    reset
                 </button>
             </div>
         </div>

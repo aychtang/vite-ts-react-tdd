@@ -1,11 +1,12 @@
 {
-  "name": "vite-ts",
+  "name": "vite-ts-react-tdd",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "ci-build": "tsc && NODE_ENV=test jest && vite build",
     "preview": "vite preview",
     "test": "NODE_ENV=test jest"
   },

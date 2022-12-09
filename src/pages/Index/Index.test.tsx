@@ -37,6 +37,7 @@ describe("Index.test.tsx - Index Page", () => {
             render(<App />);
 
             indexPage.clickButton('decrement');
+            expect(indexPage.isCounterValue(-1)).toBeTruthy();
 
             indexPage.clickButton('increment');
             expect(indexPage.isCounterValue(0)).toBeTruthy();

@@ -12,7 +12,7 @@ class MockTemperatureFinder {
         locationName: string
     ): Promise<TemperatureAtLocation> {
         return {
-            locationName: "London",
+            locationName,
             temperature: this.temperature,
         };
     }
@@ -20,7 +20,11 @@ class MockTemperatureFinder {
 
 const weatherPage = {
     render: (temperature: number) =>
-        render(<Weather temperatureFinder={new MockTemperatureFinder(temperature)} />),
+        render(
+            <Weather
+                temperatureFinder={new MockTemperatureFinder(temperature)}
+            />
+        ),
     setLocationValue: (locationName: string) => {
         const locationInput = screen.getByRole("textbox");
         fireEvent.change(locationInput, locationName);

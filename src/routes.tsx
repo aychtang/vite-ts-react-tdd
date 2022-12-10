@@ -1,7 +1,6 @@
 import IndexPage from "./pages/Index/Index";
-import { createBrowserRouter } from "react-router-dom";
 import WeatherPage from "./pages/Weather/Weather";
-import { TemperatureFinder } from "./domain/weather/service/TemperatureFinder";
+import { createBrowserRouter } from "react-router-dom";
 
 export default createBrowserRouter([
 	{
@@ -10,6 +9,6 @@ export default createBrowserRouter([
 	},
 	{
 		path: "/weather",
-		element: <WeatherPage temperatureFinder={new TemperatureFinder()} />,
+		element: <WeatherPage />,
 	},
 ]);

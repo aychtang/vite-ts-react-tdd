@@ -27,7 +27,7 @@ const weatherPage = {
         ),
     setLocation: (locationName: string) => {
         const locationInput = screen.getByRole("textbox");
-        fireEvent.change(locationInput, locationName);
+        fireEvent.change(locationInput, { target: { value: locationName } });
     },
     clickSubmit: () => {
         const buttonElement = screen.getByRole("button");

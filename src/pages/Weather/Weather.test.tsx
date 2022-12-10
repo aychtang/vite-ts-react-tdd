@@ -3,40 +3,51 @@ import { TemperatureAtLocation } from "../../domain/weather/service/TemperatureF
 import Weather from "./Weather";
 
 class MockTemperatureFinder {
-	public async getTemperatureAt(
-		locationName: string
-	): Promise<TemperatureAtLocation> {
-		return {
-			locationName: "London",
-			temperature: 22,
-		};
-	}
+    temperature: number;
+    constructor(temperature: number) {
+        this.temperature = temperature;
+    }
+
+    public async getTemperatureAt(
+        locationName: string
+    ): Promise<TemperatureAtLocation> {
+        return {
+            locationName: "London",
+            temperature: this.temperature,
+        };
+    }
 }
 
 const weatherPage = {
-	render: () =>
-		render(<Weather temperatureFinder={new MockTemperatureFinder()} />),
-	setLocationValue: (locationName: string) => {
-		const locationInput = screen.getByRole("textbox");
-		fireEvent.change(locationInput, locationName);
-	},
-	clickSubmit: () => {
-		const buttonElement = screen.getByRole("button");
-		fireEvent.click(buttonElement);
-	},
-	isLocationTemperature: async (temp: number) => {
-		return await screen.findByText(`Temperature is ${temp}`);
-	},
+    render: (temperature: number) =>
+        render(<Weather temperatureFinder={new MockTemperatureFinder(temperature)} />),
+    setLocationValue: (locationName: string) => {
+        const locationInput = screen.getByRole("textbox");
+        fireEvent.change(locationInput, locationName);
+    },
+    clickSubmit: () => {
+        const buttonElement = screen.getByRole("button");
+        fireEvent.click(buttonElement);
+    },
+    isLocationTemperature: async (temp: number) => {
+        return await screen.findByText(`Temperature is ${temp}`);
+    },
 };
 
-describe("Index.test.tsx - Index Page", () => {
-	it("should show the temperature ", async () => {
-		weatherPage.render();
+describe("Weather.test.tsx", () => {
+    it("should show the temperature after user clicks submit", async () => {
+        weatherPage.render(22);
+        weatherPage.setLocationValue("London");
+        weatherPage.clickSubmit();
 
-		weatherPage.setLocationValue("London");
+        expect(await weatherPage.isLocationTemperature(22)).toBeTruthy();
+    });
 
-		weatherPage.clickSubmit();
+    it("should show the temperature after user clicks submit", async () => {
+        weatherPage.render(25);
+        weatherPage.setLocationValue("Madrid");
+        weatherPage.clickSubmit();
 
-		expect(await weatherPage.isLocationTemperature(22)).toBeTruthy();
-	});
+        expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();
+    });
 });

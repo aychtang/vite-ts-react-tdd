@@ -19,13 +19,13 @@ class MockTemperatureFinder {
 }
 
 const weatherPage = {
-    render: (temperature: number) =>
+    render: ({ temperature }: { temperature: number }) =>
         render(
             <Weather
                 temperatureFinder={new MockTemperatureFinder(temperature)}
             />
         ),
-    setLocationValue: (locationName: string) => {
+    setLocation: (locationName: string) => {
         const locationInput = screen.getByRole("textbox");
         fireEvent.change(locationInput, locationName);
     },
@@ -40,16 +40,16 @@ const weatherPage = {
 
 describe("Weather.test.tsx", () => {
     it("should show the temperature after user clicks submit", async () => {
-        weatherPage.render(22);
-        weatherPage.setLocationValue("London");
+        weatherPage.render({ temperature: 22 });
+        weatherPage.setLocation("London");
         weatherPage.clickSubmit();
 
         expect(await weatherPage.isLocationTemperature(22)).toBeTruthy();
     });
 
     it("should show the temperature after user clicks submit", async () => {
-        weatherPage.render(25);
-        weatherPage.setLocationValue("Madrid");
+        weatherPage.render({ temperature: 25 });
+        weatherPage.setLocation("Madrid");
         weatherPage.clickSubmit();
 
         expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();

@@ -7,7 +7,7 @@ export type GeocodedLocation = {
 };
 
 export class NominatumClient {
-	public geocodeLocation(locationName: string): Promise<any> {
+	public geocodeLocation(locationName: string): Promise<GeocodedLocation> {
 		return fetch(
 			`https://nominatim.openstreetmap.org/search.php?city=${locationName}&format=jsonv2`
 		)

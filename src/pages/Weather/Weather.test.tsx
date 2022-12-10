@@ -42,7 +42,7 @@ const weatherPage = {
 		return await screen.findByText(`Temperature is ${temp}`);
 	},
 	toggleTemperatureType: (type: "fahrenheight" | "celcius") => {
-		const buttonElement = screen.getByText("To fahrenheight");
+		const buttonElement = screen.getByText(`To ${type}`);
 		fireEvent.click(buttonElement);
 	},
 };
@@ -62,29 +62,5 @@ describe("Weather.test.tsx", () => {
 		weatherPage.clickSubmit();
 
 		expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();
-	});
-
-	it("should allow the user to toggle to fahrenheight", async () => {
-		weatherPage.render({ temperature: 25 });
-		weatherPage.setLocation("Madrid");
-		weatherPage.clickSubmit();
-
-		expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();
-
-		weatherPage.toggleTemperatureType("fahrenheight");
-
-		expect(await weatherPage.isLocationTemperature(77)).toBeTruthy();
-	});
-
-	it("should allow the user to toggle to fahrenheight", async () => {
-		weatherPage.render({ temperature: 22 });
-		weatherPage.setLocation("London");
-		weatherPage.clickSubmit();
-
-		expect(await weatherPage.isLocationTemperature(22)).toBeTruthy();
-
-		weatherPage.toggleTemperatureType("fahrenheight");
-
-		expect(await weatherPage.isLocationTemperature(71.6)).toBeTruthy();
 	});
 });

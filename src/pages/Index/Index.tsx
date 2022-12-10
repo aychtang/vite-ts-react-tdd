@@ -4,6 +4,7 @@ import './Index.css'
 
 function App() {
     const [count, setCount] = useState(0)
+    const shouldDisableResetButton = count === 0;
 
     return (
         <div className="App">
@@ -15,9 +16,10 @@ function App() {
                     <img src={reactLogo} className="logo react" alt="React logo" />
                 </a>
             </div>
-            <h1>Vite + React</h1>
+            <h1>Do TDD with TypeScript Vite + React</h1>
+            <h2>CD ready SPA starter pack by <a href='https://linkedin.com/in/aychtang' target="_blank">Howard Tang</a></h2>
             <div className="card">
-                <h2>counter value is {count}</h2>
+                <h3>counter value is {count}</h3>
 
                 <button onClick={() => setCount((count) => count + 1)}>
                     increment
@@ -27,7 +29,7 @@ function App() {
                     decrement
                 </button>
 
-                <button onClick={() => setCount(0)} disabled={count === 0}>
+                <button onClick={() => setCount(0)} disabled={shouldDisableResetButton}>
                     reset
                 </button>
             </div>

@@ -4,10 +4,10 @@ import Router from './routes';
 import { RouterProvider } from "react-router-dom";
 import './main.css'
 
-export const MainElements = (
+export const MainTree = (
   <React.StrictMode>
     <RouterProvider router={Router}></RouterProvider>
   </React.StrictMode>
 );
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(MainElements)
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(MainTree)

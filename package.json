@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && NODE_ENV=test jest && vite build",
-    "build-no-test": "tsc && vite build",
+    "build:lite": "tsc && vite build",
     "preview": "vite preview",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "tsc": "tsc"
   },
   "dependencies": {
     "react": "^18.2.0",

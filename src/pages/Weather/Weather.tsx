@@ -4,14 +4,15 @@ import { TemperatureFinder } from "../../domain/weather/service/TemperatureFinde
 type WeatherPageProps = {
 	temperatureFinder?: TemperatureFinder;
 };
+
 function Weather({
 	temperatureFinder = new TemperatureFinder(),
 }: WeatherPageProps) {
 	const [temperature, setTemperature] = useState<number | null>(null);
-	const [inputValue, setInputValue] = useState("");
+	const [location, setLocation] = useState("");
 	const onClick = async () => {
 		const temperatureData = await temperatureFinder.getTemperatureAt(
-			inputValue
+			location
 		);
 		setTemperature(temperatureData.temperature);
 	};
@@ -23,8 +24,8 @@ function Weather({
 				type="text"
 				name="location"
 				id="location"
-				value={inputValue}
-				onChange={(e) => setInputValue(e.target.value)}
+				value={location}
+				onChange={(e) => setLocation(e.target.value)}
 			/>
 			<button onClick={onClick}>Submit</button>
 			<div>{temperature ? `Temperature is ${temperature}` : ""}</div>

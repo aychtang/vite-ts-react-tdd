@@ -1,6 +1,10 @@
 import "universal-fetch";
-import { GeocodedLocation } from "./NominatumClient";
-import { TemperatureAtLocation } from "../service/TemperatureFinder";
+import { GeocodedLocation } from "./Geocoding";
+
+export type TemperatureAtLocation = {
+	locationName: string;
+	temperature: number;
+};
 
 export class OpenMateoClient {
 	public getWeatherForLatLon(

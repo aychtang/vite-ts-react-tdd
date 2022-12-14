@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { TemperatureFinder } from "../../domain/weather/service/TemperatureFinder";
+import { TemperatureFactory } from "../../domain/weather/service/TemperatureFactory";
 
 type WeatherPageProps = {
-	temperatureFinder?: TemperatureFinder;
+	temperatureFinder?: TemperatureFactory;
 };
 
-function Weather({
-	temperatureFinder = new TemperatureFinder(),
+function WeatherPage({
+	temperatureFinder = new TemperatureFactory(),
 }: WeatherPageProps) {
 	const [temperature, setTemperature] = useState<number | null>(null);
 	const [location, setLocation] = useState("");
-	const onClick = async () => {
-		const temperatureData = await temperatureFinder.getTemperatureAt(
-			location
-		);
-		setTemperature(temperatureData.temperature);
+	const onClickCelcius = async () => {
+		const temperature = await temperatureFinder.getTemperatureAt(location);
+		setTemperature(temperature.asCelcius());
+	};
+
+	const onClickFahrenheight = async () => {
+		const temperature = await temperatureFinder.getTemperatureAt(location);
+		setTemperature(temperature.asFahrenheight());
 	};
 
 	return (
@@ -27,10 +30,12 @@ function Weather({
 				value={location}
 				onChange={(e) => setLocation(e.target.value)}
 			/>
-			<button onClick={onClick}>Submit</button>
+			<button onClick={onClickCelcius}>Submit</button>
+			<button onClick={onClickFahrenheight}>To fahrenheight</button>
+			<button onClick={onClickCelcius}>To celcius</button>
 			<div>{temperature ? `Temperature is ${temperature}` : ""}</div>
 		</div>
 	);
 }
 
-export default Weather;
+export default WeatherPage;

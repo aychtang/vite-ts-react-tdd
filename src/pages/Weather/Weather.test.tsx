@@ -1,32 +1,26 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import {
-	TemperatureAtLocation,
-	TemperatureFinder,
-} from "../../domain/weather/service/TemperatureFinder";
-import Weather from "./Weather";
+import { Temperature } from "../../domain/weather/data/Temperature";
+import { TemperatureFactory } from "../../domain/weather/service/TemperatureFactory";
+import WeatherPage from "./Weather";
 
-class MockTemperatureFinder
-	implements Pick<TemperatureFinder, keyof TemperatureFinder>
-{
+class MockTemperatureFinder {
 	temperature: number;
 	constructor(temperature: number) {
 		this.temperature = temperature;
 	}
 
-	public async getTemperatureAt(
-		locationName: string
-	): Promise<TemperatureAtLocation> {
-		return {
-			locationName,
-			temperature: this.temperature,
-		};
+	public async getTemperatureAt(location: string): Promise<Temperature> {
+		return new Temperature({
+			location,
+			celcius: this.temperature,
+		});
 	}
 }
 
 const weatherPage = {
 	render: ({ temperature }: { temperature: number }) =>
 		render(
-			<Weather
+			<WeatherPage
 				temperatureFinder={new MockTemperatureFinder(temperature)}
 			/>
 		),
@@ -61,6 +55,20 @@ describe("Weather.test.tsx", () => {
 		weatherPage.setLocation("Madrid");
 		weatherPage.clickSubmit();
 
+		expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();
+	});
+
+	it("should allow the user to switch the temperature to fahrenheight and back", async () => {
+		weatherPage.render({ temperature: 25 });
+		weatherPage.setLocation("Madrid");
+		weatherPage.clickSubmit();
+
+		expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();
+
+		weatherPage.toggleTemperatureType("fahrenheight");
+		expect(await weatherPage.isLocationTemperature(77)).toBeTruthy();
+
+		weatherPage.toggleTemperatureType("celcius");
 		expect(await weatherPage.isLocationTemperature(25)).toBeTruthy();
 	});
 });

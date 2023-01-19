@@ -2,6 +2,8 @@
 
 Work in progress :) I'm building this repo to help educate on best practices for React readability and testing principles.
 
+Please fork the repo to experiment and make changes!
+
 ## Install
 
 -   This repo uses `pnpm`, you can find the installation instructions at https://pnpm.io/installation.

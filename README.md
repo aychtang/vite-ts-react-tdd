@@ -22,3 +22,12 @@ pnpm test
 ```
 pnpm dev
 ```
+
+## The Continuous Deployment feedback cycle
+
+-   Decide what to build
+-   Write a new test for that behaviour
+-   Write code to pass that test
+-   Refactor
+-   Merge new code to main branch
+-   Automated deploy when code is merged

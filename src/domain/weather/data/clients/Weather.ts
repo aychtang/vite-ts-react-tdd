@@ -13,7 +13,7 @@ export class OpenMateoClient {
 		return fetch(
 			`https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&current_weather=true`
 		)
-			.then((x) => x.json())
+			.then((response) => response.json())
 			.then((openMeteoResponse) => ({
 				locationName: location.locationName,
 				temperature: openMeteoResponse.current_weather.temperature,

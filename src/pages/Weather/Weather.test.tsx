@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Temperature } from "../../domain/weather/data/Temperature";
-import { TemperatureFactory } from "../../domain/weather/service/TemperatureFactory";
 import WeatherPage from "./Weather";
 
 class MockTemperatureFinder {

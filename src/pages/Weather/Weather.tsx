@@ -10,6 +10,7 @@ function WeatherPage({
 }: WeatherPageProps) {
 	const [temperature, setTemperature] = useState<number | null>(null);
 	const [location, setLocation] = useState("");
+
 	const onClickCelcius = async () => {
 		const temperature = await temperatureFinder.getTemperatureAt(location);
 		setTemperature(temperature.asCelcius());

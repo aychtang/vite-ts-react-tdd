@@ -11,7 +11,7 @@ export class NominatumClient {
 		return fetch(
 			`https://nominatim.openstreetmap.org/search.php?city=${locationName}&format=jsonv2`
 		)
-			.then((x) => x.json())
+			.then((response) => response.json())
 			.then((nominatumResponse) => ({
 				locationName,
 				lat: nominatumResponse[0].lat,

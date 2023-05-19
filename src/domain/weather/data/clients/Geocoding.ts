@@ -6,6 +6,8 @@ export type GeocodedLocation = {
 	lon: number;
 };
 
+// Code change test
+
 export class NominatumClient {
 	public geocodeLocation(locationName: string): Promise<GeocodedLocation> {
 		return fetch(
